@@ -18,9 +18,19 @@ class MainApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData.dark().copyWith(
         scaffoldBackgroundColor: kPrimaryColor,
-        textTheme: GoogleFonts.montserratTextTheme(),
+        textTheme: GoogleFonts.montserratTextTheme().copyWith(
+          bodyLarge: GoogleFonts.montserrat(
+            color: Colors.white,
+          ),
+          titleLarge: GoogleFonts.montserrat(
+            color: Colors.white,
+          ),
+          titleMedium: GoogleFonts.montserrat(
+            color: Colors.grey,
+          ),
+        ),
       ),
-      home:const SplashView(),
+      home: const SplashView(),
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:bookly/features/home/presentation/views/home_view.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 
 class SplashViewBody extends StatefulWidget {
   const SplashViewBody({super.key});
@@ -18,70 +17,78 @@ class _SplashViewBodyState extends State<SplashViewBody>
   @override
   void initState() {
     super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 2),
-    );
+    initSlidingAnimation();
+    navigateToHome();
+  }
 
-    _animation = Tween<Offset>(
-      begin: Offset.zero,
-      end: const Offset(0, -11),
-    ).animate(_animationController);
-
-    _animationController.forward().whenComplete(
-      () {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const HomeView(),
-          ),
-        );
-      },
-    );
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisSize: MainAxisSize.max,
-      children: [
-        const Spacer(
-          flex: 1,
-        ),
-        Container(
-          width: double.infinity,
-          height: 200,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(
-                'assets/images/Logo.png',
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            width: double.infinity,
+            height: 150,
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage(
+                  'assets/images/Logo.png',
+                ),
+                scale: 1.2,
               ),
-              scale: 1.2,
             ),
           ),
-        ),
-        const Spacer(
-          flex: 1,
-        ),
-        AnimatedBuilder(
-            animation: _animation,
-            builder: (context, _) {
-              return SlideTransition(
-                position: _animation,
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: Text(
-                    'Ahmed Ezzt',
-                    style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          color: Colors.white,
-                        ),
+          AnimatedBuilder(
+              animation: _animation,
+              builder: (context, _) {
+                return SlideTransition(
+                  position: _animation,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Text(
+                      'Ahmed Ezzt',
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                            color: Colors.white,
+                          ),
+                    ),
                   ),
-                ),
-              );
-            }),
-      ],
+                );
+              }),
+        ],
+      ),
     );
+  }
+
+  void initSlidingAnimation() {
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1500),
+    );
+
+    _animation = Tween<Offset>(
+      begin: Offset(0, 5),
+      end: Offset.zero,
+    ).animate(_animationController);
+
+    _animationController.forward();
+  }
+
+  void navigateToHome() {
+    Future.delayed(const Duration(seconds: 2), () {
+      Get.offAll(
+        () => const HomeView(),
+        transition: Transition.cupertino,
+        duration: const Duration(seconds: 1),
+      );
+    });
   }
 }
