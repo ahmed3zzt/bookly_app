@@ -13,6 +13,8 @@ dependencies:
   get: ^4.6.6
   google_fonts: ^6.2.1
   unicons: ^2.1.1
+  floating_navbar: ^2.0.2
+  glass:
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:

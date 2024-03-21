@@ -1,40 +1,18 @@
-import 'package:bookly/features/home/presentation/views/widgets/home_view_body.dart';
+import 'package:bookly/features/home/presentation/views/widgets/Home_view_body_builder.dart';
 import 'package:flutter/material.dart';
-import 'package:unicons/unicons.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
-        appBar: HomeAppBar(),
-        body: const Padding(
+        body: Padding(
           padding: EdgeInsets.all(16.0),
-          child: HomeViewBody(),
+          child: HomeViewBodyBuilder(),
         ),
       ),
-    );
-  }
-
-  AppBar HomeAppBar() {
-    return AppBar(
-      backgroundColor: Colors.transparent,
-      elevation: 0,
-      title: Image.asset('assets/images/Logo.png', height: 30),
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            UniconsLine.search,
-            size: 28,
-          ),
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-      ],
     );
   }
 }
