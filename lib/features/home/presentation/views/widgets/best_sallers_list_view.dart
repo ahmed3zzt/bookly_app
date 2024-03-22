@@ -1,7 +1,7 @@
+import 'package:bookly/core/app_router.dart';
 import 'package:bookly/core/asset_data.dart';
-import 'package:bookly/features/single_book/presentation/views/single_book_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
 
 class BestSellersListView extends StatelessWidget {
@@ -15,9 +15,8 @@ class BestSellersListView extends StatelessWidget {
         (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              Get.to(
-                () => const SingleBookView(),
-                transition: Transition.cupertino,
+              GoRouter.of(context).push(
+                AppRouter.bookDetailsRoute,
               );
             },
             child: Padding(

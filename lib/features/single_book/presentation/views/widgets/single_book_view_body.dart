@@ -4,7 +4,7 @@ import 'package:bookly/features/single_book/presentation/views/widgets/single_bo
 import 'package:bookly/features/single_book/presentation/views/widgets/single_book_view_body_price_field.dart';
 import 'package:bookly/features/single_book/presentation/views/widgets/single_book_view_body_text.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
 
 class SingleBookViewBody extends StatelessWidget {
@@ -23,7 +23,7 @@ class SingleBookViewBody extends StatelessWidget {
               CustomAppBar(
                 firstChild: IconButton(
                   onPressed: () {
-                    Get.back();
+                    GoRouter.of(context).pop();
                   },
                   icon: const Icon(
                     UniconsLine.multiply,
