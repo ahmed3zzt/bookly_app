@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
 
-class BestSellersListView extends StatelessWidget {
-  const BestSellersListView({super.key});
+class VerticalList extends StatelessWidget {
+  const VerticalList({super.key});
 
   @override
   Widget build(BuildContext context) {

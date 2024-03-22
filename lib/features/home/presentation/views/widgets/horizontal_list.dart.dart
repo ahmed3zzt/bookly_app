@@ -3,8 +3,8 @@ import 'package:bookly/core/asset_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class FeaturedItemsList extends StatelessWidget {
-  const FeaturedItemsList({super.key});
+class HorizontalList extends StatelessWidget {
+  const HorizontalList({super.key});
 
   @override
   Widget build(BuildContext context) {

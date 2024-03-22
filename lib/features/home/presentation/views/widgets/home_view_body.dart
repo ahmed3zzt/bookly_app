@@ -1,6 +1,8 @@
-import 'package:bookly/features/home/presentation/views/widgets/best_sallers_list_view.dart';
-import 'package:bookly/features/home/presentation/views/widgets/featured_items_list.dart';
+import 'package:bookly/core/app_router.dart';
+import 'package:bookly/features/home/presentation/views/widgets/virtical_list.dart';
+import 'package:bookly/features/home/presentation/views/widgets/horizontal_list.dart.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
 
 class HomeViewBody extends StatelessWidget {
@@ -23,7 +25,11 @@ class HomeViewBody extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    GoRouter.of(context).push(
+                      AppRouter.searchRoute,
+                    );
+                  },
                   icon: const Icon(UniconsLine.search, size: 28),
                 ),
               ],
@@ -33,7 +39,7 @@ class HomeViewBody extends StatelessWidget {
         const SliverToBoxAdapter(
           child: SizedBox(
             height: 300,
-            child: FeaturedItemsList(),
+            child: HorizontalList(),
           ),
         ),
         SliverToBoxAdapter(
@@ -48,7 +54,7 @@ class HomeViewBody extends StatelessWidget {
             ),
           ),
         ),
-        const BestSellersListView(),
+        const VerticalList(),
       ],
     );
   }

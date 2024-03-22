@@ -1,3 +1,4 @@
+import 'package:bookly/core/app_router.dart';
 import 'package:bookly/core/asset_data.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_appbar.dart';
 import 'package:bookly/features/single_book/presentation/views/widgets/single_book_view_body_list.dart';
@@ -23,7 +24,7 @@ class SingleBookViewBody extends StatelessWidget {
               CustomAppBar(
                 firstChild: IconButton(
                   onPressed: () {
-                    GoRouter.of(context).pop();
+                    GoRouter.of(context).replace(AppRouter.homeRoute);
                   },
                   icon: const Icon(
                     UniconsLine.multiply,

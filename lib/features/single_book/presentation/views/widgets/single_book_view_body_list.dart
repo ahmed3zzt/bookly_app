@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../home/presentation/views/widgets/featured_items_list.dart';
+import '../../../../home/presentation/views/widgets/horizontal_list.dart.dart';
 
 class SingleBookViewBodyList extends StatelessWidget {
   const SingleBookViewBodyList({
@@ -28,7 +28,7 @@ class SingleBookViewBodyList extends StatelessWidget {
         ),
         const SizedBox(
           height: 200,
-          child: FeaturedItemsList(),
+          child: HorizontalList(),
         )
       ],
     );
