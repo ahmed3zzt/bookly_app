@@ -88,7 +88,7 @@ class VerticalList extends StatelessWidget {
                                 const SizedBox(width: 10),
                                 Text(
                                   books[index].volumeInfo.ratingsCount == null
-                                      ? '0'
+                                      ? '(0)'
                                       : '(${books[index].volumeInfo.ratingsCount})',
                                   style:
                                       Theme.of(context).textTheme.titleMedium,
