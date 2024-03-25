@@ -13,19 +13,7 @@ class HomeViewBodyBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: Connectivity().onConnectivityChanged,
-        builder: (context, AsyncSnapshot<ConnectivityResult> snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.data == ConnectivityResult.none) {
-              return offlineBuilder(context);
-            } else {
-              return homeBuilder();
-            }
-          } else {
-            return loadingBuilder(context);
-          }
-        });
+    return homeBuilder();
   }
 
   Widget homeBuilder() {
@@ -59,31 +47,6 @@ class HomeViewBodyBuilder extends StatelessWidget {
       ],
       horizontalPadding: 62.0,
       hapticFeedback: true,
-    );
-  }
-
-  Widget offlineBuilder(context) {
-    return Scaffold(
-      body: Center(
-        child: Text('No Internet Connection Available',
-            style: Theme.of(context).textTheme.headlineLarge),
-      ),
-    );
-  }
-
-  Widget loadingBuilder(context) {
-    return const Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(),
-          SizedBox(
-            height: 20,
-          ),
-          Text('Check Network Connection'),
-        ],
-      ),
     );
   }
 }

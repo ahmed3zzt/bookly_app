@@ -23,7 +23,20 @@ class BookImage extends StatelessWidget {
           borderRadius: BorderRadius.circular(10.0),
           child: CachedNetworkImage(
             imageUrl: imageUrl,
-            errorWidget: (context, url, error) => const Icon(UniconsLine.image),
+            errorWidget: (context, url, error) => SizedBox(
+              height: 200,
+              width: 180,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: const Icon(
+                  UniconsLine.image_block,
+                  size: 40,
+                ),
+              ),
+            ),
             fit: BoxFit.fill,
           ),
         ),
