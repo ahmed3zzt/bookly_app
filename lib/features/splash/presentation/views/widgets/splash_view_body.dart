@@ -75,7 +75,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     );
 
     _animation = Tween<Offset>(
-      begin: Offset(0, 5),
+      begin: const Offset(0, 5),
       end: Offset.zero,
     ).animate(_animationController);
 

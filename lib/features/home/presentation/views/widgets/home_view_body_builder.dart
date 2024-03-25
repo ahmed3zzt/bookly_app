@@ -1,5 +1,6 @@
 import 'package:bookly/constants.dart';
 import 'package:bookly/features/home/presentation/views/widgets/home_view_body.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,22 @@ class HomeViewBodyBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: Connectivity().onConnectivityChanged,
+        builder: (context, AsyncSnapshot<ConnectivityResult> snapshot) {
+          if (snapshot.hasData) {
+            if (snapshot.data == ConnectivityResult.none) {
+              return offlineBuilder(context);
+            } else {
+              return homeBuilder();
+            }
+          } else {
+            return loadingBuilder(context);
+          }
+        });
+  }
+
+  Widget homeBuilder() {
     return FloatingNavBar(
       resizeToAvoidBottomInset: false,
       color: kPrimaryColor,
@@ -42,6 +59,31 @@ class HomeViewBodyBuilder extends StatelessWidget {
       ],
       horizontalPadding: 62.0,
       hapticFeedback: true,
+    );
+  }
+
+  Widget offlineBuilder(context) {
+    return Scaffold(
+      body: Center(
+        child: Text('No Internet Connection Available',
+            style: Theme.of(context).textTheme.headlineLarge),
+      ),
+    );
+  }
+
+  Widget loadingBuilder(context) {
+    return const Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CircularProgressIndicator(),
+          SizedBox(
+            height: 20,
+          ),
+          Text('Check Network Connection'),
+        ],
+      ),
     );
   }
 }

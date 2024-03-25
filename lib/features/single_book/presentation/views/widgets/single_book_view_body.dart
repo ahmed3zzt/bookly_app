@@ -69,7 +69,7 @@ class SingleBookViewBody extends StatelessWidget {
               SizedBox(
                 height: size.height * 0.1,
               ),
-              SingleBookViewBodyList(),
+              const SingleBookViewBodyList(),
             ],
           ),
         ),

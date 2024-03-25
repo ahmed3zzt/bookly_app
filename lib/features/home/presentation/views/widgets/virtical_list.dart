@@ -1,6 +1,9 @@
 import 'package:bookly/core/app_router.dart';
-import 'package:bookly/core/asset_data.dart';
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
+import 'package:bookly/features/home/presentation/manger/newest_books_cubit/newest_books_cubit.dart';
+import 'package:bookly/features/home/presentation/views/widgets/custom_book_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
 
@@ -9,84 +12,128 @@ class VerticalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        childCount: 5,
-        (BuildContext context, int index) {
-          return GestureDetector(
-            onTap: () {
-              GoRouter.of(context).push(
-                AppRouter.bookDetailsRoute,
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    margin: const EdgeInsets.only(right: 16.0),
-                    width: 150,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      image: const DecorationImage(
-                        image: AssetImage(AssetData.book),
-                        fit: BoxFit.cover,
-                      ),
+    return BlocBuilder<NewestBooksCubit, NewestBooksState>(
+      builder: (context, state) {
+        if (state is NewestBooksSuccess) {
+          final List<BookModel> books = state.books;
+          return SliverList(
+            delegate: SliverChildBuilderDelegate(
+              childCount: state.books.length,
+              (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).push(
+                      AppRouter.bookDetailsRoute,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        SizedBox(
+                          width: 150,
+                          height: 200,
+                          child: BookImage(
+                            tag: books[index].id!,
+                            imageUrl: books[index]
+                                    .volumeInfo
+                                    .imageLinks!
+                                    .thumbnail ??
+                                'https://images.unsplash.com/photo-1617049170146-45a8b5b5f1c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(height: 16),
+                            SizedBox(
+                              width: 250,
+                              child: Text(
+                                books[index].volumeInfo.title!.length > 50
+                                    ? '${books[index].volumeInfo.title!.substring(0, 50)}...'
+                                    : books[index].volumeInfo.title!,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineLarge!
+                                    .copyWith(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.normal),
+                                softWrap: true,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            checkAuthor(context, books, index),
+                            const SizedBox(height: 16),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  'Free',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleLarge!
+                                      .copyWith(fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(width: 64),
+                                const Icon(UniconsSolid.star,
+                                    color: Colors.yellow),
+                                const SizedBox(width: 5),
+                                Text(
+                                    books[index]
+                                        .volumeInfo
+                                        .averageRating
+                                        .toString(),
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge),
+                                const SizedBox(width: 10),
+                                Text(
+                                  '(${books[index].volumeInfo.ratingsCount})',
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 16),
-                      SizedBox(
-                        width: 250,
-                        child: Text(
-                          'Harry Potter and the Goblet of Fire',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineLarge!
-                              .copyWith(fontWeight: FontWeight.normal),
-                          softWrap: true,
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        'J.K. Rowling',
-                        style: Theme.of(context).textTheme.titleMedium,
-                      ),
-                      const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '\$199.99',
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleLarge!
-                                .copyWith(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 64),
-                          const Icon(UniconsSolid.star, color: Colors.yellow),
-                          const SizedBox(width: 5),
-                          Text('4.5',
-                              style: Theme.of(context).textTheme.bodyLarge),
-                          const SizedBox(width: 10),
-                          Text(
-                            '(2536)',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ],
-              ),
+                );
+              },
             ),
           );
-        },
-      ),
+        } else if (state is NewestBooksFailure) {
+          return SliverToBoxAdapter(child: Text(state.errMessage));
+        } else {
+          return SliverToBoxAdapter(
+            child: SizedBox(
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: const Center(child: CircularProgressIndicator())),
+          );
+        }
+      },
     );
+  }
+
+  Text checkAuthor(context, books, index) {
+    if (books[index].volumeInfo.authors != null) {
+      if (books[index].volumeInfo.authors[0]!.length > 20) {
+        return Text(
+          '${books[index].volumeInfo.authors![0].substring(0, 20)}...',
+          style: Theme.of(context).textTheme.titleMedium,
+        );
+      } else {
+        return Text(
+          '${books[index].volumeInfo.authors![0]}',
+          style: Theme.of(context).textTheme.titleMedium,
+        );
+      }
+    } else {
+      return const Text(
+        'No Author',
+        style: TextStyle(color: Colors.grey),
+      );
+    }
   }
 }
