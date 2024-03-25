@@ -4,7 +4,6 @@ import 'package:bookly/features/home/presentation/views/widgets/virtical_list.da
 import 'package:bookly/features/home/presentation/views/widgets/horizontal_list.dart.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unicons/unicons.dart';
@@ -70,14 +69,16 @@ class HomeViewBody extends StatelessWidget {
         const SliverToBoxAdapter(
           child: SizedBox(
             height: 300,
-            child: HorizontalList(),
+            child: HorizontalList(
+              hasHero: true,
+            ),
           ),
         ),
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.only(top: 32.0, bottom: 32.0),
             child: Text(
-              'Best Sellers',
+              'Newest Books',
               style: Theme.of(context)
                   .textTheme
                   .titleLarge!

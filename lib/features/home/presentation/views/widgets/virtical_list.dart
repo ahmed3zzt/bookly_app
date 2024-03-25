@@ -24,6 +24,7 @@ class VerticalList extends StatelessWidget {
                   onTap: () {
                     GoRouter.of(context).push(
                       AppRouter.bookDetailsRoute,
+                      extra: books[index],
                     );
                   },
                   child: Padding(
@@ -35,12 +36,10 @@ class VerticalList extends StatelessWidget {
                           width: 150,
                           height: 200,
                           child: BookImage(
+                            hasHero: true,
                             tag: books[index].id!,
-                            imageUrl: books[index]
-                                    .volumeInfo
-                                    .imageLinks!
-                                    .thumbnail ??
-                                'https://images.unsplash.com/photo-1617049170146-45a8b5b5f1c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+                            imageUrl:
+                                books[index].volumeInfo.imageLinks!.thumbnail,
                           ),
                         ),
                         Column(
@@ -80,15 +79,17 @@ class VerticalList extends StatelessWidget {
                                     color: Colors.yellow),
                                 const SizedBox(width: 5),
                                 Text(
-                                    books[index]
-                                        .volumeInfo
-                                        .averageRating
-                                        .toString(),
+                                    books[index].volumeInfo.averageRating ==
+                                            null
+                                        ? '0'
+                                        : '${books[index].volumeInfo.averageRating}',
                                     style:
                                         Theme.of(context).textTheme.bodyLarge),
                                 const SizedBox(width: 10),
                                 Text(
-                                  '(${books[index].volumeInfo.ratingsCount})',
+                                  books[index].volumeInfo.ratingsCount == null
+                                      ? '0'
+                                      : '(${books[index].volumeInfo.ratingsCount})',
                                   style:
                                       Theme.of(context).textTheme.titleMedium,
                                 ),

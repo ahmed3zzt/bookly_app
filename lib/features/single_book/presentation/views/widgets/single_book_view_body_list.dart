@@ -28,7 +28,9 @@ class SingleBookViewBodyList extends StatelessWidget {
         ),
         const SizedBox(
           height: 200,
-          child: HorizontalList(),
+          child: HorizontalList(
+            hasHero: false,
+          ),
         )
       ],
     );

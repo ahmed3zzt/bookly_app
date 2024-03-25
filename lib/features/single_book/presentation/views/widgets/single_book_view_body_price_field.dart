@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SingleBookViewBodyPriceField extends StatelessWidget {
-  const SingleBookViewBodyPriceField({super.key});
+  const SingleBookViewBodyPriceField({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class SingleBookViewBodyPriceField extends StatelessWidget {
                 padding: const EdgeInsets.all(12.0),
                 child: Center(
                   child: Text(
-                    '\$ 19.99',
+                    'Free',
                     style: Theme.of(context).textTheme.headlineMedium!.copyWith(
                           fontWeight: FontWeight.bold,
                           fontSize: 26,

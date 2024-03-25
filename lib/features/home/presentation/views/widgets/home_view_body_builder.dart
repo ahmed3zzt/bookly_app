@@ -1,6 +1,5 @@
 import 'package:bookly/constants.dart';
 import 'package:bookly/features/home/presentation/views/widgets/home_view_body.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:flutter/material.dart';

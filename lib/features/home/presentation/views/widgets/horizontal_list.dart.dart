@@ -7,7 +7,8 @@ import 'package:go_router/go_router.dart';
 import '../../manger/feature_books_cubit/featured_books_cubit.dart';
 
 class HorizontalList extends StatelessWidget {
-  const HorizontalList({super.key});
+  const HorizontalList({super.key, required this.hasHero});
+  final bool hasHero;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FeaturedBooksCubit, FeaturedBooksState>(
@@ -22,9 +23,11 @@ class HorizontalList extends StatelessWidget {
                 onTap: () {
                   GoRouter.of(context).push(
                     AppRouter.bookDetailsRoute,
+                    extra: state.books[index],
                   );
                 },
                 child: BookImage(
+                  hasHero: hasHero,
                   imageUrl: state
                           .books[index].volumeInfo.imageLinks?.thumbnail ??
                       'https://images.unsplash.com/photo-1617049170146-45a8b5b5f1c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
