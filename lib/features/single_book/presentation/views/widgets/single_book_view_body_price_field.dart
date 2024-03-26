@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SingleBookViewBodyPriceField extends StatelessWidget {
   const SingleBookViewBodyPriceField({
     super.key,
+    required this.url,
   });
-
+  final Uri url;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,7 +14,8 @@ class SingleBookViewBodyPriceField extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
+          SizedBox(
+            width: 150,
             child: DecoratedBox(
               decoration: const BoxDecoration(
                   color: Colors.white,
@@ -35,7 +38,12 @@ class SingleBookViewBodyPriceField extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
+          GestureDetector(
+            onTap: () {
+              if (url.toString().isNotEmpty) {
+                _launchUrl(url);
+              }
+            },
             child: DecoratedBox(
               decoration: const BoxDecoration(
                   color: Colors.orange,
@@ -61,5 +69,11 @@ class SingleBookViewBodyPriceField extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _launchUrl(url) async {
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
   }
 }

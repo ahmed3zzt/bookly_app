@@ -51,7 +51,7 @@ class BookImage extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: imageUrl,
                 errorWidget: (context, url, error) => SizedBox(
-                  height: 200,
+                  height: 100,
                   width: 180,
                   child: DecoratedBox(
                     decoration: BoxDecoration(

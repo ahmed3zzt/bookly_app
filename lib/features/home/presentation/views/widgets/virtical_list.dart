@@ -33,8 +33,8 @@ class VerticalList extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         SizedBox(
-                          width: 150,
-                          height: 200,
+                          width: 130,
+                          height: 180,
                           child: BookImage(
                             hasHero: true,
                             tag: books[index].id!,
@@ -47,7 +47,7 @@ class VerticalList extends StatelessWidget {
                           children: [
                             const SizedBox(height: 16),
                             SizedBox(
-                              width: 250,
+                              width: 200,
                               child: Text(
                                 books[index].volumeInfo.title!.length > 50
                                     ? '${books[index].volumeInfo.title!.substring(0, 50)}...'

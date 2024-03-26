@@ -1,4 +1,5 @@
 import 'package:bookly/core/app_router.dart';
+import 'package:bookly/core/asset_data.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -41,7 +42,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
             decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
-                  'assets/images/Logo.png',
+                  AssetData.logo,
                 ),
                 scale: 1.2,
               ),

@@ -17,9 +17,9 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return StreamBuilder(
       stream: Connectivity().onConnectivityChanged,
-      builder: (context, AsyncSnapshot<ConnectivityResult> snapshot) {
+      builder: (context, AsyncSnapshot<List<ConnectivityResult>> snapshot) {
         if (snapshot.hasData) {
-          if (snapshot.data == ConnectivityResult.none) {
+          if (snapshot.data![0] == ConnectivityResult.none) {
             if (BlocProvider.of<NewestBooksCubit>(context).state
                 is NewestBooksSuccess) {
               return homeBuilder(context);
@@ -68,7 +68,7 @@ class HomeViewBody extends StatelessWidget {
         ),
         const SliverToBoxAdapter(
           child: SizedBox(
-            height: 300,
+            height: 250,
             child: HorizontalList(
               hasHero: true,
             ),
@@ -102,16 +102,19 @@ class HomeViewBody extends StatelessWidget {
 
   Widget loadingBuilder(context) {
     return const Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CircularProgressIndicator(),
-          SizedBox(
-            height: 20,
-          ),
-          Text('Check Network Connection'),
-        ],
+      body: SizedBox(
+        width: double.infinity,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(
+              height: 20,
+            ),
+            Text('Check Network Connection'),
+          ],
+        ),
       ),
     );
   }

@@ -1,9 +1,12 @@
 import 'package:bookly/constants.dart';
 import 'package:bookly/features/home/presentation/views/widgets/home_view_body.dart';
+import 'package:bookly/features/splash/presentation/views/widgets/author_page.dart';
 import 'package:floating_navbar/floating_navbar.dart';
 import 'package:floating_navbar/floating_navbar_item.dart';
 import 'package:flutter/material.dart';
 import 'package:unicons/unicons.dart';
+
+import '../../../../splash/presentation/views/this_feature_in_future.dart';
 
 class HomeViewBodyBuilder extends StatelessWidget {
   const HomeViewBodyBuilder({
@@ -30,17 +33,17 @@ class HomeViewBodyBuilder extends StatelessWidget {
         ),
         FloatingNavBarItem(
           iconData: UniconsLine.bookmark,
-          page: const HomeViewBody(),
+          page: const InFutureFeature(),
           title: 'Favorite',
         ),
         FloatingNavBarItem(
           iconData: UniconsLine.play,
-          page: const HomeViewBody(),
+          page: const InFutureFeature(),
           title: 'Playlist',
         ),
         FloatingNavBarItem(
           iconData: UniconsLine.user,
-          page: const HomeViewBody(),
+          page: const AuthorView(),
           title: 'Profile',
         ),
       ],

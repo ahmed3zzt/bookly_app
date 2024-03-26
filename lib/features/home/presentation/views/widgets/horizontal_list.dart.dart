@@ -26,12 +26,15 @@ class HorizontalList extends StatelessWidget {
                     extra: state.books[index],
                   );
                 },
-                child: BookImage(
-                  hasHero: hasHero,
-                  imageUrl: state
-                          .books[index].volumeInfo.imageLinks?.thumbnail ??
-                      'https://images.unsplash.com/photo-1617049170146-45a8b5b5f1c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
-                  tag: state.books[index].id!,
+                child: AspectRatio(
+                  aspectRatio: 2.5 / 4,
+                  child: BookImage(
+                    hasHero: hasHero,
+                    imageUrl: state
+                            .books[index].volumeInfo.imageLinks?.thumbnail ??
+                        'https://images.unsplash.com/photo-1617049170146-45a8b5b5f1c9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80',
+                    tag: state.books[index].id!,
+                  ),
                 ),
               );
             },

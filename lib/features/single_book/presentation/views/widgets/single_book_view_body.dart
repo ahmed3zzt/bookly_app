@@ -14,6 +14,7 @@ class SingleBookViewBody extends StatelessWidget {
   final BookModel book;
   @override
   Widget build(BuildContext context) {
+    final _url = Uri.parse(book.volumeInfo.previewLink ?? '');
     var size = MediaQuery.of(context).size;
     return SizedBox(
       height: size.height,
@@ -60,7 +61,9 @@ class SingleBookViewBody extends StatelessWidget {
               const SizedBox(
                 height: 32,
               ),
-              const SingleBookViewBodyPriceField(),
+              SingleBookViewBodyPriceField(
+                url: _url,
+              ),
               SizedBox(
                 height: size.height * 0.1,
               ),
