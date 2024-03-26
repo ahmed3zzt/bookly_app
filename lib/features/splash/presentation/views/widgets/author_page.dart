@@ -25,7 +25,11 @@ class AuthorView extends StatelessWidget {
           SizedBox(height: 15),
           Text('Build With 🤍 By ', style: TextStyle(fontSize: 20)),
           Text('Ahmed Ezzt', style: TextStyle(fontSize: 20)),
-          Spacer()
+          Spacer(),
+          Text(
+            'Copyright © 2024 All Rights Reserved By Ahmed Ezzt',
+            style: TextStyle(fontSize: 13, color: Colors.grey),
+          ),
         ],
       ),
     ));
